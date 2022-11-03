@@ -15,12 +15,17 @@ const CommentsBase = props => {
           <img src={minus} alt="" />
         </div>
       </ScoreCard>
-      <div className="reply-box">
-        <div className="reply-icon">
-          <img src={reply} alt="" />
+      {props.username !== props.curUser.username && (
+        <div className="reply-box">
+          <div className="reply-icon">
+            <img src={reply} alt="" />
+          </div>
+          <p>Reply</p>
         </div>
-        <p>Reply</p>
-      </div>
+      )}
+      {props.username === props.curUser.username && (
+        <div className="curUser"></div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import './ScoreCard.css';
 
 const ScoreCard = props => {
-  const classes = 'score-card ' + props.className;
+  const classes = 'score-card';
   return <div className={classes}>{props.children}</div>;
 };
 

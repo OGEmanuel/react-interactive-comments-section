@@ -7,6 +7,9 @@ const UserProfile = props => {
       </div>
       <div className="user-profile__info">
         <p className="username">{props.username}</p>
+        {props.username === props.curUser.username && (
+          <p className="you">you</p>
+        )}
         <p className="created-at">{props.createdAt}</p>
       </div>
     </div>

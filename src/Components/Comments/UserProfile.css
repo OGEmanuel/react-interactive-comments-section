@@ -1,12 +1,17 @@
 .user-profile,
 .user-profile__info {
   display: flex;
-  gap: 1.5rem;
+  /* gap: 1rem; */
+  align-items: center;
 }
 
 .user-profile {
-  align-items: center;
   margin-bottom: 1rem;
+  gap: 1.3rem;
+}
+
+.user-profile__info {
+  gap: 1rem;
 }
 
 .user-profile__picture {
@@ -20,6 +25,14 @@
 .username,
 .created-at {
   font-size: 1.5rem;
+}
+
+.you {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(238, 40%, 52%);
+  padding: 0.09rem 0.6rem 0.08rem;
+  border-radius: 0.2rem;
+  font-size: 1.3rem;
 }
 
 .username {

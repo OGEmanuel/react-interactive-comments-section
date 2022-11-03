@@ -1,0 +1,14 @@
+.before {
+  position: relative;
+}
+
+.before ::before {
+  content: '';
+  display: block;
+  width: 0.3%;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 26.5%;
+  background-color: hsl(211, 10%, 75%);
+}
