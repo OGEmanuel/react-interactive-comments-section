@@ -1,0 +1,31 @@
+.user-profile,
+.user-profile__info {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.user-profile {
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-profile__picture {
+  width: 4rem;
+}
+
+.user-profile__picture img {
+  width: 100%;
+}
+
+.username,
+.created-at {
+  font-size: 1.5rem;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.created-at {
+  color: hsl(211, 10%, 45%);
+}

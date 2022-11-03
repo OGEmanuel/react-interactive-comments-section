@@ -1,0 +1,38 @@
+.base,
+.reply-box {
+  display: flex;
+}
+
+.base {
+  justify-content: space-between;
+}
+
+.plus-icon,
+.minus-icon,
+.reply-box {
+  cursor: pointer;
+}
+
+.plus-icon {
+  padding-top: 0.3rem;
+}
+
+.score,
+.reply-box p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: hsl(238, 40%, 52%);
+}
+
+.minus-icon {
+  padding-bottom: 0.3rem;
+}
+
+.reply-box {
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.reply-icon {
+  padding-top: 0.7rem;
+}
