@@ -1,3 +1,4 @@
+import AddComments from './Components/Comments/AddComments';
 import AllComments from './Components/Comments/AllComments';
 
 const DATA = {
@@ -75,7 +76,17 @@ const DATA = {
 
 function App() {
   // console.log(DATA);
-  return <AllComments comments={DATA.comments} curUser={DATA.currentUser} />;
+  return (
+    <div>
+      <AllComments comments={DATA.comments} curUser={DATA.currentUser} />
+      <AddComments
+        curUser={DATA.currentUser}
+        placeholder="Add a comment..."
+        button="SEND"
+        class="add-comments"
+      />
+    </div>
+  );
 }
 
 export default App;

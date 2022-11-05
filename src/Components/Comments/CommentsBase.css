@@ -1,5 +1,8 @@
 .base,
-.reply-box {
+.reply-box,
+.curUser,
+.edit-box,
+.delete-box {
   display: flex;
 }
 
@@ -9,7 +12,9 @@
 
 .plus-icon,
 .minus-icon,
-.reply-box {
+.reply-box,
+.delete-box,
+.edit-box {
   cursor: pointer;
 }
 
@@ -18,21 +23,42 @@
 }
 
 .score,
-.reply-box p {
+.reply-box p,
+.edit-box {
+  color: hsl(238, 40%, 52%);
+}
+
+.score,
+.reply-box p,
+.delete-box,
+.edit-box {
   font-size: 1.8rem;
   font-weight: 500;
-  color: hsl(238, 40%, 52%);
 }
 
 .minus-icon {
   padding-bottom: 0.3rem;
 }
 
-.reply-box {
-  gap: 0.7rem;
+.reply-box,
+.curUser {
   align-items: center;
+}
+
+.reply-box,
+.delete-box,
+.edit-box {
+  gap: 0.7rem;
 }
 
 .reply-icon {
   padding-top: 0.7rem;
+}
+
+.curUser {
+  gap: 1.5rem;
+}
+
+.delete-box p {
+  color: hsl(358, 79%, 66%);
 }

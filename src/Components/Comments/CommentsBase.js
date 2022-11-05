@@ -3,7 +3,13 @@ import './CommentsBase.css';
 import minus from './icons/icon-minus.svg';
 import plus from './icons/icon-plus.svg';
 import reply from './icons/icon-reply.svg';
+import del from './icons/icon-delete.svg';
+import edit from './icons/icon-edit.svg';
+
 const CommentsBase = props => {
+  const handleClick = e => {
+    props.onReplyClick(e.target);
+  };
   return (
     <div className="base">
       <ScoreCard>
@@ -16,7 +22,7 @@ const CommentsBase = props => {
         </div>
       </ScoreCard>
       {props.username !== props.curUser.username && (
-        <div className="reply-box">
+        <div onClick={handleClick} className="reply-box">
           <div className="reply-icon">
             <img src={reply} alt="" />
           </div>
@@ -24,7 +30,20 @@ const CommentsBase = props => {
         </div>
       )}
       {props.username === props.curUser.username && (
-        <div className="curUser"></div>
+        <div className="curUser">
+          <div className="delete-box">
+            <div className="delete-icon">
+              <img src={del} alt="" />
+            </div>
+            <p>Delete</p>
+          </div>
+          <div className="edit-box">
+            <div className="edit-icon">
+              <img src={edit} alt="" />
+            </div>
+            <p>Edit</p>
+          </div>
+        </div>
       )}
     </div>
   );

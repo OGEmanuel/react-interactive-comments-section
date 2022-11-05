@@ -1,0 +1,48 @@
+textarea {
+  width: 100%;
+  padding: 1.5rem 1rem 0rem 1.5rem;
+  border: 0.1rem solid hsl(211, 10%, 70%);
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+  color: hsl(211, 10%, 45%);
+  font-weight: 500;
+  resize: none;
+}
+textarea :focus {
+  outline: none;
+}
+
+textarea ::placeholder {
+  font-size: 1.6rem;
+  font-weight: 500;
+  font-family: 'Rubik', sans-serif;
+  color: hsl(211, 10%, 45%);
+}
+
+.user-photo {
+  width: 4rem;
+}
+
+.user-photo img {
+  width: 100%;
+}
+
+button {
+  padding: 1.5rem 3rem;
+  border: none;
+  background-color: hsl(238, 40%, 52%);
+  border-radius: 1rem;
+  text-transform: uppercase;
+  color: hsl(0, 0%, 100%);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.add-replies {
+  width: 95%;
+  margin-left: 1.5rem;
+}
