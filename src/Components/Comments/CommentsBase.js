@@ -7,11 +7,11 @@ import del from './icons/icon-delete.svg';
 import edit from './icons/icon-edit.svg';
 
 const CommentsBase = props => {
-  const handleClick = e => {
-    props.onReplyClick(e.target);
+  const handleClick = id => {
+    props.onReplyClick(props.id);
   };
   return (
-    <div className="base">
+    <div className="base" key={props.id}>
       <ScoreCard>
         <div className="plus-icon">
           <img src={plus} alt="" />
@@ -22,11 +22,16 @@ const CommentsBase = props => {
         </div>
       </ScoreCard>
       {props.username !== props.curUser.username && (
-        <div onClick={handleClick} className="reply-box">
-          <div className="reply-icon">
-            <img src={reply} alt="" />
+        <div
+          key={props.id}
+          onClick={() => handleClick(props.id)}
+          id={props.id}
+          className="reply-box"
+        >
+          <div id={props.id} className="reply-icon">
+            <img id={props.id} src={reply} alt="" />
           </div>
-          <p>Reply</p>
+          <p id={props.id}>Reply</p>
         </div>
       )}
       {props.username === props.curUser.username && (

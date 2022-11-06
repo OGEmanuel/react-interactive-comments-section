@@ -3,7 +3,13 @@ import RepliesCard from '../UI/RepliesCard';
 const AllReplies = props => {
   return (
     <RepliesCard>
-      <Replies replies={props.replies} curUser={props.curUser} />
+      <Replies
+        ID={props.ID}
+        replies={props.replies}
+        curUser={props.curUser}
+        onReplyClick={props.onReplyClick}
+        isReplying={props.isReplying}
+      />
     </RepliesCard>
   );
 };

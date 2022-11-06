@@ -5,18 +5,23 @@ import UserContent from './UserContent';
 import CommentsBase from './CommentsBase';
 import AllReplies from '../Replies/AllReplies';
 import './Comments.css';
-import AddComments from './AddComments';
+import InputForm from '../InputForm/InputForm';
 
 const Comments = props => {
-  const [isReplying, setIsReplying] = useState(false);
-  const handleReplyClick = () => {
-    setIsReplying(!isReplying);
+  const [isReplying, setIsReplying] = useState(null);
+  const handleReplyClick = id => {
+    if (isReplying === id) {
+      return setIsReplying(null);
+    }
+
+    setIsReplying(id);
   };
+
   return (
     <div>
       {props.comments.map(comments => (
         <div key={comments.id}>
-          <Card className="comments">
+          <Card className="comments" id={comments.id}>
             <UserProfile
               profilePicture={comments.user.image.png}
               username={comments.user.username}
@@ -25,20 +30,21 @@ const Comments = props => {
             />
             <UserContent content={comments.content} />
             <CommentsBase
+              id={comments.id}
               onReplyClick={handleReplyClick}
               username={comments.user.username}
               score={comments.score}
               curUser={props.curUser}
             />
           </Card>
-          {isReplying && (
-            <AddComments
-              curUser={props.curUser}
-              placeholder=""
-              button="REPLY"
-              class="add-comments"
-            />
-          )}
+
+          <InputForm
+            curUser={props.curUser}
+            placeholder=""
+            button="REPLY"
+            class={isReplying === comments.id ? 'add-reply show' : 'add-reply'}
+          />
+
           {comments.replies.length > 0 && (
             <div className="before">
               {comments.replies.map(replies => (
@@ -46,6 +52,8 @@ const Comments = props => {
                   key={replies.id}
                   replies={replies}
                   curUser={props.curUser}
+                  onReplyClick={handleReplyClick}
+                  isReplying={isReplying}
                 />
               ))}
             </div>

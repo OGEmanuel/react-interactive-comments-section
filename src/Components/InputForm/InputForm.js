@@ -1,9 +1,9 @@
 import Card from '../UI/Card';
-import './AddComments.css';
+import './InputForm.css';
 
-const AddComments = props => {
+const InputForm = props => {
   return (
-    <Card className={props.class}>
+    <Card className={props.class} id={props.id}>
       <form>
         <textarea placeholder={props.placeholder} cols="30" rows="4"></textarea>
         <div className="base">
@@ -17,4 +17,4 @@ const AddComments = props => {
   );
 };
 
-export default AddComments;
+export default InputForm;

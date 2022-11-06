@@ -3,12 +3,12 @@ import UserProfile from '../Comments/UserProfile';
 import UserContent from '../Comments/UserContent';
 import CommentsBase from '../Comments/CommentsBase';
 import './Replies.css';
-import AddComments from '../Comments/AddComments';
+import InputForm from '../InputForm/InputForm';
 
 const Replies = props => {
   return (
     <div>
-      <Card className="replies">
+      <Card className="replies" id={props.replies.id}>
         <UserProfile
           profilePicture={props.replies.user.image.png}
           username={props.replies.user.username}
@@ -20,18 +20,23 @@ const Replies = props => {
           replyingTo={props.replies.replyingTo}
         />
         <CommentsBase
+          id={props.replies.id}
           username={props.replies.user.username}
           curUser={props.curUser}
           score={props.replies.score}
-          // onReplyClick={handleReplyClick}
+          onReplyClick={props.onReplyClick}
         />
       </Card>
       {props.replies.user.username !== props.curUser.username && (
-        <AddComments
+        <InputForm
           curUser={props.curUser}
           placeholder=""
           button="REPLY"
-          class="add-replies"
+          class={
+            props.isReplying === props.replies.id
+              ? 'add-replies show'
+              : 'add-replies'
+          }
         />
       )}
     </div>

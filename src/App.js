@@ -1,5 +1,5 @@
-import AddComments from './Components/Comments/AddComments';
 import AllComments from './Components/Comments/AllComments';
+import InputForm from './Components/InputForm/InputForm';
 
 const DATA = {
   currentUser: {
@@ -79,7 +79,7 @@ function App() {
   return (
     <div>
       <AllComments comments={DATA.comments} curUser={DATA.currentUser} />
-      <AddComments
+      <InputForm
         curUser={DATA.currentUser}
         placeholder="Add a comment..."
         button="SEND"

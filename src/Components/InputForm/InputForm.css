@@ -1,3 +1,13 @@
+.add-reply,
+.add-replies {
+  display: none;
+}
+
+.add-reply.show,
+.add-replies.show {
+  display: block;
+}
+
 textarea {
   width: 100%;
   padding: 1.5rem 1rem 0rem 1.5rem;
