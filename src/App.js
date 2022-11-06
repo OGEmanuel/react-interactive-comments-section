@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AllComments from './Components/Comments/AllComments';
 import InputForm from './Components/InputForm/InputForm';
 
@@ -75,11 +76,23 @@ const DATA = {
 };
 
 function App() {
-  // console.log(DATA);
+  const [content, setContent] = useState(DATA.comments);
+  const addNewContent = newContent => {
+    setContent(prevContent => {
+      // console.log(prevContent);
+      return [...prevContent, newContent];
+      // console.log(newContent);
+    });
+  };
   return (
     <div>
-      <AllComments comments={DATA.comments} curUser={DATA.currentUser} />
+      <AllComments
+        comments={content}
+        curUser={DATA.currentUser}
+        setContent={setContent}
+      />
       <InputForm
+        onAddNew={addNewContent}
         curUser={DATA.currentUser}
         placeholder="Add a comment..."
         button="SEND"

@@ -17,6 +17,15 @@ const Comments = props => {
     setIsReplying(id);
   };
 
+  const addNewReply = newReply => {
+    props.setContent(prevContent => {
+      console.log(prevContent);
+      console.log(newReply);
+      // return [...prevContent, newReply];
+      // console.log(newContent);
+    });
+  };
+
   return (
     <div>
       {props.comments.map(comments => (
@@ -39,6 +48,8 @@ const Comments = props => {
           </Card>
 
           <InputForm
+            onAddNew={addNewReply}
+            replyingTo={comments.user.username}
             curUser={props.curUser}
             placeholder=""
             button="REPLY"
