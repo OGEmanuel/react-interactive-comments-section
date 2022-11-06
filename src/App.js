@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import AllComments from './Components/Comments/AllComments';
 import InputForm from './Components/InputForm/InputForm';
+import nextId from 'react-id-generator';
+import useDateFormat from './Components/useDateFormat';
 
 const DATA = {
   currentUser: {
@@ -77,13 +79,39 @@ const DATA = {
 
 function App() {
   const [content, setContent] = useState(DATA.comments);
+  const [comment, setComment] = useState('');
+  // console.log(DATA.currentUser.image.png);
+  const commentChangeHandler = e => {
+    setComment(e.target.value);
+  };
+
+  const newComment = {
+    id: nextId(),
+    content: comment,
+    createdAt: useDateFormat(new Date()),
+    score: 0,
+    user: {
+      image: {
+        png: DATA.currentUser.image.png,
+      },
+      username: DATA.currentUser.username,
+    },
+    replies: [],
+  };
+
+  const submitHandler = e => {
+    e.preventDefault();
+    if (!comment) return;
+    addNewContent(newComment);
+    setComment('');
+  };
+
   const addNewContent = newContent => {
     setContent(prevContent => {
-      // console.log(prevContent);
       return [...prevContent, newContent];
-      // console.log(newContent);
     });
   };
+
   return (
     <div>
       <AllComments
@@ -92,7 +120,10 @@ function App() {
         setContent={setContent}
       />
       <InputForm
-        onAddNew={addNewContent}
+        state={comment}
+        setState={setComment}
+        onChange={commentChangeHandler}
+        onSubmit={submitHandler}
         curUser={DATA.currentUser}
         placeholder="Add a comment..."
         button="SEND"

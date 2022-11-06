@@ -6,9 +6,16 @@ import CommentsBase from './CommentsBase';
 import AllReplies from '../Replies/AllReplies';
 import './Comments.css';
 import InputForm from '../InputForm/InputForm';
+import nextId from 'react-id-generator';
+import useDateFormat from '../useDateFormat';
 
 const Comments = props => {
+  const reply = props.comments.map(comments => comments.replies);
+  const replyingTo = reply.map(rep => rep.replyingTo);
   const [isReplying, setIsReplying] = useState(null);
+  const [replies, setReplies] = useState(reply);
+
+  // console.log(replies);
   const handleReplyClick = id => {
     if (isReplying === id) {
       return setIsReplying(null);
@@ -17,12 +24,35 @@ const Comments = props => {
     setIsReplying(id);
   };
 
-  const addNewReply = newReply => {
-    props.setContent(prevContent => {
-      console.log(prevContent);
-      console.log(newReply);
-      // return [...prevContent, newReply];
-      // console.log(newContent);
+  const replyChangeHandler = e => {
+    setReplies(e.target.value);
+  };
+
+  const newReplies = {
+    id: nextId(),
+    content: replies,
+    createdAt: useDateFormat(new Date()),
+    score: 0,
+    replyingTo: replyingTo,
+    user: {
+      image: {
+        png: props.curUser.image.png,
+      },
+      username: props.curUser.username,
+    },
+  };
+
+  const submitReplyHandler = e => {
+    e.preventDefault();
+    if (!replies) return;
+    addNewContent(newReplies);
+    console.log(newReplies);
+    setReplies('');
+  };
+
+  const addNewContent = newContent => {
+    setReplies(prevContent => {
+      return [...prevContent, newContent];
     });
   };
 
@@ -48,15 +78,17 @@ const Comments = props => {
           </Card>
 
           <InputForm
-            onAddNew={addNewReply}
-            replyingTo={comments.user.username}
+            state={replies}
+            setState={setReplies}
+            onChange={replyChangeHandler}
+            onSubmit={submitReplyHandler}
             curUser={props.curUser}
             placeholder=""
             button="REPLY"
             class={isReplying === comments.id ? 'add-reply show' : 'add-reply'}
           />
 
-          {comments.replies.length > 0 && (
+          {reply.length > 0 && (
             <div className="before">
               {comments.replies.map(replies => (
                 <AllReplies
