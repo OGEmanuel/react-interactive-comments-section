@@ -29,6 +29,10 @@ const Replies = props => {
       </Card>
       {props.replies.user.username !== props.curUser.username && (
         <InputForm
+          // state={replies}
+          // setState={setReplies}
+          // onChange={replyChangeHandler}
+          // onSubmit={submitReplyHandler}
           curUser={props.curUser}
           placeholder=""
           button="REPLY"

@@ -4,6 +4,7 @@ const AllReplies = props => {
   return (
     <RepliesCard>
       <Replies
+        username={props.username}
         ID={props.ID}
         replies={props.replies}
         curUser={props.curUser}

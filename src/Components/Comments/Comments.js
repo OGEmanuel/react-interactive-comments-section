@@ -10,12 +10,9 @@ import nextId from 'react-id-generator';
 import useDateFormat from '../useDateFormat';
 
 const Comments = props => {
-  const reply = props.comments.map(comments => comments.replies);
-  const replyingTo = reply.map(rep => rep.replyingTo);
   const [isReplying, setIsReplying] = useState(null);
-  const [replies, setReplies] = useState(reply);
-
-  // console.log(replies);
+  const [content, setContent] = useState(props.comments.replies);
+  const [reply, setReply] = useState('');
   const handleReplyClick = id => {
     if (isReplying === id) {
       return setIsReplying(null);
@@ -24,16 +21,12 @@ const Comments = props => {
     setIsReplying(id);
   };
 
-  const replyChangeHandler = e => {
-    setReplies(e.target.value);
-  };
-
   const newReplies = {
     id: nextId(),
-    content: replies,
+    content: reply,
     createdAt: useDateFormat(new Date()),
     score: 0,
-    replyingTo: replyingTo,
+    replyingTo: props.comments.user.username,
     user: {
       image: {
         png: props.curUser.image.png,
@@ -42,67 +35,80 @@ const Comments = props => {
     },
   };
 
-  const submitReplyHandler = e => {
-    e.preventDefault();
-    if (!replies) return;
-    addNewContent(newReplies);
-    console.log(newReplies);
-    setReplies('');
+  const replyChangeHandler = e => {
+    setReply(e.target.value);
   };
 
   const addNewContent = newContent => {
-    setReplies(prevContent => {
+    setContent(prevContent => {
+      console.log(prevContent);
+
       return [...prevContent, newContent];
     });
   };
 
+  const submitReplyHandler = e => {
+    e.preventDefault();
+    if (!reply) return;
+    addNewContent(newReplies);
+    setReply('');
+    setIsReplying(null);
+  };
+
   return (
     <div>
-      {props.comments.map(comments => (
-        <div key={comments.id}>
-          <Card className="comments" id={comments.id}>
-            <UserProfile
-              profilePicture={comments.user.image.png}
-              username={comments.user.username}
-              curUser={props.curUser}
-              createdAt={comments.createdAt}
-            />
-            <UserContent content={comments.content} />
-            <CommentsBase
-              id={comments.id}
-              onReplyClick={handleReplyClick}
-              username={comments.user.username}
-              score={comments.score}
-              curUser={props.curUser}
-            />
-          </Card>
-
-          <InputForm
-            state={replies}
-            setState={setReplies}
-            onChange={replyChangeHandler}
-            onSubmit={submitReplyHandler}
+      <div key={props.comments.id}>
+        <Card className="comments" id={props.comments.id}>
+          <UserProfile
+            profilePicture={props.comments.user.image.png}
+            username={props.comments.user.username}
             curUser={props.curUser}
-            placeholder=""
-            button="REPLY"
-            class={isReplying === comments.id ? 'add-reply show' : 'add-reply'}
+            createdAt={props.comments.createdAt}
           />
+          <UserContent content={props.comments.content} />
+          <CommentsBase
+            id={props.comments.id}
+            onReplyClick={handleReplyClick}
+            username={props.comments.user.username}
+            score={props.comments.score}
+            curUser={props.curUser}
+          />
+        </Card>
 
-          {reply.length > 0 && (
-            <div className="before">
-              {comments.replies.map(replies => (
-                <AllReplies
-                  key={replies.id}
-                  replies={replies}
-                  curUser={props.curUser}
-                  onReplyClick={handleReplyClick}
-                  isReplying={isReplying}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+        <InputForm
+          state={reply}
+          setState={setReply}
+          onChange={replyChangeHandler}
+          onSubmit={submitReplyHandler}
+          curUser={props.curUser}
+          placeholder=""
+          button="REPLY"
+          class={
+            isReplying === props.comments.id ? 'add-reply show' : 'add-reply'
+          }
+        />
+
+        {props.comments.replies.length > 0 && (
+          <div className="before">
+            {content.map(replies => (
+              <AllReplies
+                state={reply}
+                setState={setReply}
+                comments={props.comments}
+                // onSubmitHandler={getSubmitHandler}
+                // onAddNew={addNew}
+                username={props.comments.user.username}
+                key={replies.id}
+                replies={replies}
+                curUser={props.curUser}
+                onReplyClick={handleReplyClick}
+                // onAddReplies={addReplies}
+                isReplying={isReplying}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

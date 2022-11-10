@@ -108,6 +108,7 @@ function App() {
 
   const addNewContent = newContent => {
     setContent(prevContent => {
+      console.log(prevContent);
       return [...prevContent, newContent];
     });
   };
@@ -117,7 +118,7 @@ function App() {
       <AllComments
         comments={content}
         curUser={DATA.currentUser}
-        setContent={setContent}
+        // setContent={setContent}
       />
       <InputForm
         state={comment}
